@@ -10,17 +10,19 @@ const fs = require('fs');
 
 const app = express();
 const PORT = 3000;
-const JWT_SECRET = 'your_jwt_secret'; // Replace with a secure string
+require('dotenv').config(); // Add this line at the top
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 // 📡 Middleware
 app.use(express.json());
 
 // 🔗 MySQL Connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'G@urav04',
-  database: 'attendance_system'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 connection.connect((err) => {
